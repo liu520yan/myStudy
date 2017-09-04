@@ -16,13 +16,16 @@ public class RunThread {
         ThreadC threadC = new ThreadC();
         ThreadD threadD = new ThreadD();
 
+        //thread方法启动线程
         threadA.run();
         threadB.run();
 
+        //runnable 方法启动线程
         Thread c = new Thread(threadC);
         c.start();
-        Thread d = new Thread(threadC);
+        Thread d = new Thread(threadD);
         d.start();
-
     }
+
+
 }
