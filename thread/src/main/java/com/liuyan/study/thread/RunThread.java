@@ -25,6 +25,8 @@ public class RunThread {
         c.start();
         Thread d = new Thread(threadD);
         d.start();
+
+        //有返回值的方法
     }
 
 
