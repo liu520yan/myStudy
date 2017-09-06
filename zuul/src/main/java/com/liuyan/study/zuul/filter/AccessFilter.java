@@ -9,8 +9,7 @@ import org.springframework.stereotype.Component;
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import static com.liuyan.study.zuul.security.SignatureGenerator.generate;
 
@@ -45,11 +44,15 @@ public class AccessFilter extends ZuulFilter {
         HttpServletRequest request = ctx.getRequest();
         Map<String, String[]> parameterMap = request.getParameterMap();
         Map<String, String> stringStringMap = new HashMap<>();
+
+        Map<String, List<String>> map = new HashMap<>();
         for (String key : parameterMap.keySet()) {
+
             if ("secretKey".equals(key)) {
                 secretKey = parameterMap.get(key)[0];
                 continue;
             }
+            map.put(key, Arrays.asList(parameterMap.get(key)));
             stringStringMap.put(key, parameterMap.get(key)[0]);
         }
         String uri = request.getRequestURI();
@@ -63,7 +66,9 @@ public class AccessFilter extends ZuulFilter {
 
         request.removeAttribute("secretKey");
         request.setAttribute("secretKey", sign);
-        ctx.setRequest(request);
+
+        map.put("sign", Collections.singletonList(sign));
+        ctx.setRequestQueryParams(map);
 
         log.info("add sign success !!!  sign \n{}", sign);
         return null;
