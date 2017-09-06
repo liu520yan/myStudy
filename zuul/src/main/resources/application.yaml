@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: zuul
+
+server:
+  port: 9999
+
+zuul:
+  routes:
+    api:
+      path: /tima/**
+      url: http://localhost:8080/
+
