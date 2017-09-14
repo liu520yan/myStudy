@@ -35,7 +35,13 @@ public class ConcurrentHashMapStudy {
         }
     }
 
+//    public static void main(String[] args) {
+//        unsafeConcurrentUpdate();
+//    }
+
     public static void main(String[] args) {
-        unsafeConcurrentUpdate();
+        Integer a = 100, b = 100, c = 150, d = 150;
+        System.out.println(a == b);
+        System.out.println(c == d);
     }
 }

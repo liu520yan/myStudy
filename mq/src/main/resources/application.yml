@@ -1,0 +1,9 @@
+server:
+  port: 8090
+spring:
+  kafka:
+    bootstrap-servers: 172.20.61.32:9092
+    consumer:
+      group-id: user
+    template:
+      default-topic: s1-veh.main.remaind
