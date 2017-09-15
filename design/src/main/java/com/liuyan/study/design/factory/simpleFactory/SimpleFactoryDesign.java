@@ -1,4 +1,4 @@
-package com.liuyan.study.design.factory.SimpleFactory;
+package com.liuyan.study.design.factory.simpleFactory;
 
 /**
  * 来源：http://www.jianshu.com/p/6939416ecfa3
