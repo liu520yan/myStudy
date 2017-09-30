@@ -1,10 +1,6 @@
 package come.liuyan.study.base.equals;
 
 
-import com.sun.xml.internal.ws.util.StringUtils;
-
-import java.util.HashMap;
-
 /**
  * Created by liuyan on 2017/9/11.
  */
