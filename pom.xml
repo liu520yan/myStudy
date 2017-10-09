@@ -20,7 +20,8 @@
         <module>design</module>
         <module>mq</module>
         <module>graphql</module>
-        <module>pay</module>
+        <module>alipay</module>
+        <module>wxpay</module>
     </modules>
     <properties>
         <java.version>1.8</java.version>
