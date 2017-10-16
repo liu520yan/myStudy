@@ -22,6 +22,8 @@
         <module>graphql</module>
         <module>alipay</module>
         <module>wxpay</module>
+        <module>utils</module>
+        <module>thyeleaf</module>
     </modules>
     <properties>
         <java.version>1.8</java.version>
@@ -29,6 +31,8 @@
         <compiler.plugin.version>3.6.0</compiler.plugin.version>
         <fastjson.version>1.2.38</fastjson.version>
         <spring.kafka.version>1.2.2.RELEASE</spring.kafka.version>
+        <mybatis-spring-boot>1.2.0</mybatis-spring-boot>
+        <mysql-connector>5.1.39</mysql-connector>
     </properties>
 
     <dependencies>
