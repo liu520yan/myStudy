@@ -24,6 +24,7 @@
         <module>wxpay</module>
         <module>utils</module>
         <module>thyeleaf</module>
+        <module>easypoi</module>
     </modules>
     <properties>
         <java.version>1.8</java.version>

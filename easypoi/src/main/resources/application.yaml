@@ -1,0 +1,19 @@
+spring:
+  datasource:
+     commomdata:
+        driver-class-name: com.mysql.jdbc.Driver
+        url: jdbc:mysql://172.20.61.33:3306/COMMON_DATA
+        username: fawmdev
+        password: gZW5jYXA6RXRoZXJu
+     sync:
+        url: jdbc:mysql://172.20.61.33:3306/s2_TDATA_SYNC
+        username: fawmdev
+        password: gZW5jYXA6RXRoZXJu
+        driver-class-name: com.mysql.jdbc.Driver
+     mine:
+        url: jdbc:mysql://127.0.0.1:3306/tima
+        username: root
+        password: root
+        driver-class-name: com.mysql.jdbc.Driver
+  jpa:
+    show-sql: true
