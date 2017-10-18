@@ -11,24 +11,20 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = POIApplication.class)
-public class Trance {
+public class JiaocheTests {
 
     @Autowired
     InsertJiaoChe insertS2;
 
     @Test
-    public void a() {
-         insertS2.insetCity();
+    public void city() throws Exception {
+        insertS2.insertCity();
     }
 
     @Test
-    public void b() {
+    public void pro() throws Exception {
         insertS2.insertPro();
     }
 
-    @Test
-    public void c() {
-        insertS2.insertDistract();
-    }
 }
 

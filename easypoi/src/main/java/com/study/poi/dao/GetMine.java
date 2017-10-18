@@ -1,4 +1,4 @@
-package com.study.poi.service;
+package com.study.poi.dao;
 
 import com.study.poi.mine.Jiaoche;
 import com.study.poi.mine.Jiqi;

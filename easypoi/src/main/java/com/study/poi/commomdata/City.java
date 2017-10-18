@@ -10,4 +10,6 @@ public class City {
     String id;
     String cityName;
     String provinceID;
+
+    String provinceName;
 }

@@ -9,4 +9,8 @@ import lombok.Data;
 public class District {
     String id;
     String districtName;
+    String cityID;
+
+    String provinceName;
+    String cityName;
 }
