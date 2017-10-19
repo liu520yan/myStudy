@@ -1,21 +1,15 @@
 package com.study.poi.service;
 
-import com.study.poi.commomdata.Province;
 import com.study.poi.sync.SyncCity;
 import com.study.poi.sync.SyncDistrict;
 import com.study.poi.sync.SyncPro;
 import lombok.extern.slf4j.Slf4j;
-import org.omg.CORBA.PUBLIC_MEMBER;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
-import sun.reflect.misc.ConstructorUtil;
 
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.List;
 
 /**

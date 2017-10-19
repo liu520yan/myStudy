@@ -42,7 +42,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User delete(Long id) {
-        User user = userRepository.findById(id).get();
+        User user = userRepository.findOne(id);
         userRepository.delete(user);
 
         LOGGER.info("删除用户：" + user.toString());
@@ -52,6 +52,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findById(Long id) {
         LOGGER.info("获取用户 ID ：" + id);
-        return userRepository.findById(id).get();
+        return userRepository.findOne(id);
     }
 }

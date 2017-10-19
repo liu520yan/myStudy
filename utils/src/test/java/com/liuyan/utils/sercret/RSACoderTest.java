@@ -46,7 +46,7 @@ public class RSACoderTest {
     @Test
     public void testSign() throws Exception {
         System.out.println("私钥加密——公钥解密");
-        String inputStr = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1MDc4NzEyOTUsInVzZXJfbmFtZSI6ImFkbWluIiwiYXV0aG9yaXRpZXMiOlsiUkVBRCIsIldSSVRFIl0sImp0aSI6ImNkMTYzODQyLTFhYzItNDVlNC04YWU0LTk5M2YzODg4ZWM5NSIsImNsaWVudF9pZCI6ImFjbWUiLCJzY29wZSI6WyJvcGVuaWQiXX0";
+        String inputStr = "123";
         byte[] data = inputStr.getBytes();
 
         byte[] encodedData = RSACoder.encryptByPrivateKey(data, privateKey);
