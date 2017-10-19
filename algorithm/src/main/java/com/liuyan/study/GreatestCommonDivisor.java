@@ -1,6 +1,7 @@
 package com.liuyan.study;
 
 /**
+ * 最大公约数
  * Created by liuyan on 2017/10/19.
  */
 public class GreatestCommonDivisor {
