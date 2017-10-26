@@ -1,0 +1,20 @@
+spring:
+  datasource:
+     commomdata:
+        driver-class-name: com.mysql.jdbc.Driver
+        url: jdbc:mysql://192.168.1.102:3306/excel
+        username: root
+        password: 123456
+     sync:
+        url: jdbc:mysql://192.168.1.102:3306/excel
+        username: root
+        password: 123456
+        driver-class-name: com.mysql.jdbc.Driver
+     mine:
+        url: jdbc:mysql://192.168.1.102:3306/excel
+        username: root
+        password: 123456
+        driver-class-name: com.mysql.jdbc.Driver
+  jpa:
+    show-sql: true
+getDatafromMysql: false

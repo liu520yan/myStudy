@@ -12,10 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -84,7 +81,18 @@ public class BaseService<T> {
         jiqis.stream()
                 .forEach(s -> s.setDistrictname(null));
 
-        jiqis = jiqis.stream().distinct().collect(Collectors.toList());
+        Map<String, String> jq = new HashMap<>();
+        for (Jiqi jiqi : jiqis) {
+            jq.put(jiqi.getProcode(), jiqi.getProname());
+        }
+        jiqis.clear();
+        for (String key : jq.keySet()) {
+            Jiqi a = new Jiqi();
+            a.setProcode(key);
+            a.setProname(jq.get(key));
+            jiqis.add(a);
+        }
+
         log.info("输入省数量 ：" + jiqis.size());
 
         List<Jiqi> jiaoches1 = new ArrayList<>();
@@ -131,7 +139,19 @@ public class BaseService<T> {
         //去重
         jiqis.forEach(s -> s.setDistrictode(null));
         jiqis.forEach(s -> s.setDistrictname(null));
-        jiqis = jiqis.stream().distinct().collect(Collectors.toList());
+
+        //除重
+        Map<String, Jiqi> jq = new HashMap<>();
+        for (Jiqi a : jiqis) {
+            jq.put(a.getCitycode(), a);
+        }
+        List<Jiqi> as = new ArrayList<>();
+        for (String key : jq.keySet()) {
+            Jiqi sss = jq.get(key);
+            as.add(sss);
+        }
+        jiqis = as;
+
         log.info("输入城市数量：" + jiqis.size());
 
         List<City> cities = getCommonData.getCity();
@@ -168,7 +188,6 @@ public class BaseService<T> {
 
     protected Set<SyncDistrict> getDisList(List<T> t) {
         List<Jiqi> jiqis = new ArrayList<>();
-
         for (T a : t) {
             Jiqi jiqi = new Jiqi();
             BeanUtils.copyProperties(a, jiqi);

@@ -35,7 +35,7 @@ public class InsertTData {
             log.info("syncCities 不合法！ ");
             return;
         }
-        String sql = "insert into SYNC_CITY_copy1(cityName, provinceID,outCityCode,cityId) values ";
+        String sql = "insert into SYNC_CITY(cityName, provinceID,outCityCode,cityId) values ";
         StringBuilder str = new StringBuilder();
         for (SyncCity syncCity : syncCities) {
             str.append("('");
@@ -65,7 +65,7 @@ public class InsertTData {
             log.info("syncCities 不合法！ ");
             return;
         }
-        String sql = "insert into SYNC_PROVINCE_copy1 (provinceId,provinceName,outProCode) values";
+        String sql = "insert into SYNC_PROVINCE(provinceId,provinceName,outProCode) values";
         StringBuilder str = new StringBuilder();
         for (SyncPro syncPro : syncPros) {
             str.append("(");
@@ -92,7 +92,7 @@ public class InsertTData {
             return;
         }
 
-        String sql = "insert into SYNC_DISTRICT_copy1 (cityID,districtId,districtName,outDisCode) value ";
+        String sql = "insert into SYNC_DISTRICT(cityID,districtId,districtName,outDisCode) value ";
         StringBuilder str = new StringBuilder();
         for (SyncDistrict syncDistrict : syncDistricts) {
             str.append("(");

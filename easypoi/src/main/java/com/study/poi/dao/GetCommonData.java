@@ -3,6 +3,7 @@ package com.study.poi.dao;
 import com.study.poi.commomdata.City;
 import com.study.poi.commomdata.District;
 import com.study.poi.commomdata.Province;
+import org.hibernate.annotations.Source;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
