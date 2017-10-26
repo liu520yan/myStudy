@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -29,12 +30,12 @@ public class InsertTData {
      *
      * @param syncCities
      */
-    public void insertCity(List<SyncCity> syncCities) {
+    public void insertCity(Collection<SyncCity> syncCities) {
         if (CollectionUtils.isEmpty(syncCities)) {
             log.info("syncCities 不合法！ ");
             return;
         }
-        String sql = "insert into SYNC_CITY_copy(cityName, provinceID,outCityCode,cityId) values ";
+        String sql = "insert into SYNC_CITY_copy1(cityName, provinceID,outCityCode,cityId) values ";
         StringBuilder str = new StringBuilder();
         for (SyncCity syncCity : syncCities) {
             str.append("('");
@@ -64,7 +65,7 @@ public class InsertTData {
             log.info("syncCities 不合法！ ");
             return;
         }
-        String sql = "insert into SYNC_PROVINCE_copy (provinceId,provinceName,outProCode) values";
+        String sql = "insert into SYNC_PROVINCE_copy1 (provinceId,provinceName,outProCode) values";
         StringBuilder str = new StringBuilder();
         for (SyncPro syncPro : syncPros) {
             str.append("(");
@@ -85,13 +86,13 @@ public class InsertTData {
      *
      * @param syncDistricts
      */
-    public void insertDis(List<SyncDistrict> syncDistricts) {
+    public void insertDis(Collection<SyncDistrict> syncDistricts) {
         if (CollectionUtils.isEmpty(syncDistricts)) {
             log.info("syncDistricts 不合法");
             return;
         }
 
-        String sql = "insert into SYNC_DISTRICT_copy (cityID,districtId,districtName,outDisCode) value ";
+        String sql = "insert into SYNC_DISTRICT_copy1 (cityID,districtId,districtName,outDisCode) value ";
         StringBuilder str = new StringBuilder();
         for (SyncDistrict syncDistrict : syncDistricts) {
             str.append("(");

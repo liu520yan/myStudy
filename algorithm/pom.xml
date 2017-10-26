@@ -10,6 +10,15 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>algorithm</artifactId>
-
+    <dependencies>
+        <dependency>
+            <groupId>algs4</groupId>  <!--自定义-->
+            <artifactId>algs4</artifactId>    <!--自定义-->
+            <version>1.0</version> <!--自定义-->
+            <scope>system</scope> <!--system，类似provided，需要显式提供依赖的jar以后，Maven就不会在Repository中查找它-->
+            <systemPath>${basedir}/src/main/lib/algs4.jar
+            </systemPath>
+        </dependency>
+    </dependencies>
 
 </project>

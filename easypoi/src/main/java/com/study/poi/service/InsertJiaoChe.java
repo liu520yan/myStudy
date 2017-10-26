@@ -25,7 +25,7 @@ public class InsertJiaoChe extends BaseService {
     @Autowired
     GetMine getMine;
 
-    @Value("getDatafromMysql")
+    @Value("${getDatafromMysql}")
     Boolean aBoolean;
 
     public void insertPro() throws Exception {
@@ -60,6 +60,4 @@ public class InsertJiaoChe extends BaseService {
         log.info("excle city输入大小 ：" + jiaoches.size());
         log.info("excle city插入大小 ：" + syncCities.size());
     }
-
-
 }

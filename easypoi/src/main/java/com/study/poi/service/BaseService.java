@@ -13,7 +13,14 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 /**
@@ -24,6 +31,30 @@ public class BaseService<T> {
 
     @Autowired
     GetCommonData getCommonData;
+
+    List<District> districts;
+
+    @Autowired
+    InsertTData insertTData;
+
+    private static LinkedBlockingQueue a = new LinkedBlockingQueue(100);
+
+    private static final ThreadPoolExecutor executor = new ThreadPoolExecutor(1,
+            1,
+            1,
+            TimeUnit.MINUTES,
+            a
+            ,
+            new ThreadFactory() {
+                private AtomicInteger id = new AtomicInteger(0);
+
+                @Override
+                public Thread newThread(Runnable r) {
+                    Thread thread = new Thread(r);
+                    thread.setName("MyThread-study-" + id.addAndGet(1));
+                    return thread;
+                }
+            }, new ThreadPoolExecutor.CallerRunsPolicy());
 
     /**
      * 获取省列表
@@ -135,7 +166,7 @@ public class BaseService<T> {
         return syncCities;
     }
 
-    protected List<SyncDistrict> getDisList(List<T> t) {
+    protected Set<SyncDistrict> getDisList(List<T> t) {
         List<Jiqi> jiqis = new ArrayList<>();
 
         for (T a : t) {
@@ -145,40 +176,82 @@ public class BaseService<T> {
         }
 
 
-        List<District> districts = getCommonData.getDistrict();
-        log.info("标准城市数量：" + districts.size());
-        log.info("输入城市数量：" + jiqis.size());
-        List<SyncDistrict> syncDistricts = new ArrayList<>();
-        List<Jiqi> jiqis1 = new ArrayList<>();
+        districts = getCommonData.getDistrict();
+        log.info("标准区县数量：" + districts.size());
+        log.info("输入区县数量：" + jiqis.size());
+        Set<SyncDistrict> syncDistricts = new HashSet<>();
+        Set<Jiqi> jiqis1 = new HashSet<>();
+        Set<SyncCity> syncCities = new HashSet<>();
 
         for (District district : districts) {
-            String districtName = district.getDistrictName();
-            String cityName = district.getCityName();
-            String provinceName = district.getProvinceName();
-            for (Jiqi jiqi : jiqis) {
-                if (jiqi.getDistrictname().equals(districtName)
-                        && jiqi.getCityname().equals(cityName)
-                        && jiqi.getProname().equals(provinceName)) {
-                    SyncDistrict syncDistrict = new SyncDistrict();
-                    syncDistrict.setCityID(district.getCityID());
-                    syncDistrict.setDistrictId(district.getId());
-                    syncDistrict.setOutDisCode(jiqi.getCitycode());
-                    syncDistrict.setDistrictName(districtName);
-                    syncDistricts.add(syncDistrict);
-                    jiqis1.add(jiqi);
-                }
-            }
+            threads(jiqis, syncDistricts, jiqis1, district, syncCities);
         }
-        if (jiqis.size() - jiqis1.size() > 0) {
-            jiqis.removeAll(jiqis1);
-            log.info("dis 没有匹配的数量： " + jiqis.size());
+        int i = jiqis.size() - jiqis1.size();
+        if (i > 0) {
+            log.info("dis 没有匹配的数量： " + i);
             log.info("dis 没有匹配的数据： ");
-            jiqis.stream().forEach(System.out::println);
+            jiqis.removeAll(jiqis1);
+            jiqis.forEach(System.out::println);
         } else {
             log.info("dis 全部匹配");
         }
-        log.info("输出城市数量：" + jiqis.size());
         return syncDistricts;
+    }
 
+    public class Thread2 implements Runnable {
+        List<Jiqi> jiqis;
+        Set<SyncDistrict> syncDistricts;
+        District district;
+        Set<Jiqi> jiqis1;
+        Set<SyncCity> syncCities;
+
+        Thread2(List<Jiqi> jiqis, Set<SyncDistrict> syncDistricts, Set<Jiqi> jiqis1, District district, Set<SyncCity> syncCities) {
+            this.jiqis = jiqis;
+            this.syncDistricts = syncDistricts;
+            this.jiqis1 = jiqis1;
+            this.district = district;
+            this.syncCities = syncCities;
+        }
+
+        @Override
+        public void run() {
+            threads(jiqis, syncDistricts, jiqis1, district, syncCities);
+        }
+    }
+
+    private void threads(List<Jiqi> jiqis, Set<SyncDistrict> syncDistricts, Set<Jiqi> jiqis1, District district, Set<SyncCity> syncCities) {
+        String districtName = district.getDistrictName();
+        String cityName = district.getCityName();
+        String provinceName = district.getProvinceName();
+        for (Jiqi jiqi : jiqis) {
+            if (jiqi.getProname().equals(provinceName)) {
+                if (jiqi.getCityname().equals(cityName)) {
+                    if (jiqi.getDistrictname().equals(districtName)) {
+                        SyncDistrict syncDistrict = new SyncDistrict();
+                        syncDistrict.setCityID(district.getCityID());
+                        syncDistrict.setDistrictId(district.getId());
+                        syncDistrict.setOutDisCode(jiqi.getCitycode());
+                        syncDistrict.setDistrictName(districtName);
+                        syncDistricts.add(syncDistrict);
+                        jiqis1.add(jiqi);
+                        continue;
+                    }
+
+                    if ("市辖区".equals(jiqi.getDistrictname())) {
+                        SyncDistrict syncDistrict = new SyncDistrict();
+                        syncDistrict.setOutDisCode(jiqi.getCitycode());
+
+                        //获取第一个区域名称
+                        District district1 = getCommonData.getFirstDisByCityCode(district.getCityID());
+                        syncDistrict.setDistrictName(district1.getDistrictName());
+                        syncDistrict.setDistrictId(district1.getId());
+                        syncDistrict.setCityID(district1.getCityID());
+
+                        syncDistricts.add(syncDistrict);
+                        jiqis1.add(jiqi);
+                    }
+                }
+            }
+        }
     }
 }

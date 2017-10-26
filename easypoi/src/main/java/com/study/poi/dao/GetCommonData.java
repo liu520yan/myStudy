@@ -49,4 +49,21 @@ public class GetCommonData {
         RowMapper<District> rm = BeanPropertyRowMapper.newInstance(District.class);
         return jdbcTemplate1.query(sql, rm);
     }
+
+    public District getFirstDisByCityCode(String cityCode) {
+        String sql = "SELECT a.districtName,a.cityID,a.id  FROM BASE_DISTRICT a WHERE a.cityID = " + cityCode + " ORDER BY a.id DESC LIMIT 1 ";
+        RowMapper<District> rm = BeanPropertyRowMapper.newInstance(District.class);
+        return jdbcTemplate1.queryForObject(sql, rm);
+    }
+
+    //某个省下是否有某个市
+    public int getCityUnderPro(String proName, String cityName) {
+        String sql = "SELECT count(*) FROM BASE_CITY a ,BASE_PROVINCE b WHERE a.provinceID = b.id AND b.provinceName = '" + proName + "' AND a.cityName = '" + cityName + "' ";
+        return jdbcTemplate1.queryForObject(sql, Integer.class);
+    }
+
+    public String getProIdByProName(String proName) {
+        String sql = "SELECT a.id FROM BASE_PROVINCE a WHERE a.provinceName = '" + proName + "'";
+        return jdbcTemplate1.queryForObject(sql, String.class);
+    }
 }

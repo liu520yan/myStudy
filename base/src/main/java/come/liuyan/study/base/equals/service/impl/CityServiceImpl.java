@@ -35,10 +35,12 @@ public class CityServiceImpl implements CityService {
         CITY_DB.put(city1.getId(), city1);
     }
 
+    @Override
     public List<City> findAllCity() {
         return new ArrayList<>(CITY_DB.values());
     }
 
+    @Override
     public City findCityById(Long id) {
         return CITY_DB.get(id);
     }

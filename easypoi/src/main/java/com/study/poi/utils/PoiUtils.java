@@ -26,7 +26,7 @@ public class PoiUtils {
         // 2. 创建工作类
         HSSFSheet sheet = workbook.getSheetAt(0);
 
-        int sheetCount = sheet.getLastRowNum()-2;
+        int sheetCount = sheet.getLastRowNum() - 2;
 
         List<Jiqi> jiqis = new ArrayList<>();
 
@@ -40,16 +40,19 @@ public class PoiUtils {
             HSSFCell cityName = row.getCell(3);
             HSSFCell disCode = row.getCell(0);
             HSSFCell disName = row.getCell(1);
+            HSSFCell useing = row.getCell(10);
 
             Jiqi jiqi = new Jiqi();
-            jiqi.setCitycode(proCode.getStringCellValue());
-            jiqi.setProname(proName.getStringCellValue());
-            jiqi.setCitycode(cityCode.getStringCellValue());
-            jiqi.setCityname(cityName.getStringCellValue());
-            jiqi.setDistrictname(disName.getStringCellValue());
-            jiqi.setDistrictode(disCode.getStringCellValue());
+            if ("否".equals(useing.getStringCellValue())) {
+                jiqi.setProcode(proCode.getStringCellValue());
+                jiqi.setProname(proName.getStringCellValue());
+                jiqi.setCitycode(cityCode.getStringCellValue());
+                jiqi.setCityname(cityName.getStringCellValue());
+                jiqi.setDistrictname(disName.getStringCellValue());
+                jiqi.setDistrictode(disCode.getStringCellValue());
+                jiqis.add(jiqi);
+            }
 
-            jiqis.add(jiqi);
         }
         return jiqis;
     }

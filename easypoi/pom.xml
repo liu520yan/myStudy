@@ -20,6 +20,14 @@
             <artifactId>lombok</artifactId>
             <version>1.16.18</version>
         </dependency>
+        <dependency>
+            <groupId>com.jd.com</groupId>
+            <artifactId>diz</artifactId>
+            <version>2.0</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/src/main/lib/open-api-sdk-2.0.jar
+            </systemPath>
+        </dependency>
         <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-jpa -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

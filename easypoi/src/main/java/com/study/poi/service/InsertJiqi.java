@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by liuyan on 2017/10/18.
@@ -29,8 +30,8 @@ public class InsertJiqi extends BaseService {
     @Autowired
     GetMine getMine;
 
-    @Value("getDatafromMysql")
-    Boolean aBoolean;
+//    @Value("getDatafromMysql")
+    Boolean aBoolean = false;
 
     public void insertPro() throws Exception {
         List<Jiqi> jiqis = null;
@@ -69,7 +70,7 @@ public class InsertJiqi extends BaseService {
         } else {
             jiqis = PoiUtils.readJQExcel();
         }
-        List<SyncDistrict> syncDistricts = getDisList(jiqis);
+        Set<SyncDistrict> syncDistricts = getDisList(jiqis);
         //插入数据
         insertTData.insertDis(syncDistricts);
         log.info("excle dis输入大小 ：" + jiqis.size());
