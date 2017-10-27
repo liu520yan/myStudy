@@ -17,7 +17,8 @@ import java.util.List;
 public class PoiUtils {
 
     public static List<Jiqi> readJQExcel() throws Exception {
-        String fileName = "C:\\Users\\liuyan\\Desktop\\excel\\区县信息代码表_吉林汽车TDSV2系统.xls";
+//        String fileName = "C:\\Users\\liuyan\\Desktop\\excel\\区县信息代码表_吉林汽车TDSV2系统.xls";
+        String fileName = "C:\\Users\\liuyan\\Desktop\\TDS系统省市码表\\区县信息代码表_吉林汽车TDSV2系统.xls";
         FileInputStream fileInputStream = new FileInputStream(fileName);
 
         // 1. 创建工作簿
@@ -64,7 +65,8 @@ public class PoiUtils {
      * @throws Exception
      */
     public static List<Jiaoche> readHQExcel() throws Exception {
-        String fileName = "C:\\Users\\liuyan\\Desktop\\excel\\省区和城市基础数据-轿车-红旗.xls";
+//        String fileName = "C:\\Users\\liuyan\\Desktop\\excel\\省区和城市基础数据-轿车-红旗.xls";
+        String fileName = "C:\\Users\\liuyan\\Desktop\\TDS系统省市码表\\省区和城市基础数据-轿车-红旗.xls";
         FileInputStream fileInputStream = new FileInputStream(fileName);
 
         // 1. 创建工作簿
@@ -86,7 +88,7 @@ public class PoiUtils {
             HSSFCell cityName = row.getCell(4);
 
             Jiaoche jiqi = new Jiaoche();
-            jiqi.setCitycode(proCode.getStringCellValue());
+            jiqi.setProcode(proCode.getStringCellValue());
             jiqi.setProname(proName.getStringCellValue());
             jiqi.setCitycode(cityCode.getStringCellValue());
             jiqi.setCityname(cityName.getStringCellValue());

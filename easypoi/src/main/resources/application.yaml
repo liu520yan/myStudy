@@ -1,6 +1,6 @@
 spring:
-  profiles:
-    active: home
+#  profiles:
+#    active: home
   datasource:
      commomdata:
         driver-class-name: com.mysql.jdbc.Driver
