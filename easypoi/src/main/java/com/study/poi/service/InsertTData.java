@@ -42,9 +42,9 @@ public class InsertTData {
             str.append(syncCity.getCityName());
             str.append("',");
             str.append(syncCity.getProvinceID());
-            str.append(",");
+            str.append(",'");
             str.append(syncCity.getOutCityCode());
-            str.append(",");
+            str.append("',");
             str.append(syncCity.getCityId());
             str.append(")");
             str.append(",");

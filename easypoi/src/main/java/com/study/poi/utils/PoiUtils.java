@@ -82,7 +82,7 @@ public class PoiUtils {
             // 3. 创建行 , 第4行 注意:从0开始
             HSSFRow row = sheet.getRow(i + 1);
             // 4. 创建单元格, 第4行第1列 注意:从0开始
-            HSSFCell proCode = row.getCell(0);
+            HSSFCell proCode = row.getCell(1);
             HSSFCell proName = row.getCell(2);
             HSSFCell cityCode = row.getCell(3);
             HSSFCell cityName = row.getCell(4);

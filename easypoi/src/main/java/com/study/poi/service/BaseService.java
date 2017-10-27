@@ -140,17 +140,17 @@ public class BaseService<T> {
         jiqis.forEach(s -> s.setDistrictode(null));
         jiqis.forEach(s -> s.setDistrictname(null));
 
-        //除重
-        Map<String, Jiqi> jq = new HashMap<>();
-        for (Jiqi a : jiqis) {
-            jq.put(a.getCitycode(), a);
-        }
-        List<Jiqi> as = new ArrayList<>();
-        for (String key : jq.keySet()) {
-            Jiqi sss = jq.get(key);
-            as.add(sss);
-        }
-        jiqis = as;
+//        //除重
+//        Map<String, Jiqi> jq = new HashMap<>();
+//        for (Jiqi a : jiqis) {
+//            jq.put(a.getCityname(), a);
+//        }
+//        List<Jiqi> as = new ArrayList<>();
+//        for (String key : jq.keySet()) {
+//            Jiqi sss = jq.get(key);
+//            as.add(sss);
+//        }
+//        jiqis = as;
 
         log.info("输入城市数量：" + jiqis.size());
 
