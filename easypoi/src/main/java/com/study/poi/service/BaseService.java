@@ -72,26 +72,15 @@ public class BaseService<T> {
         List<Province> provinces = getCommonData.getProvince();
         log.info("标准省数量 ：" + provinces.size());
         List<SyncPro> provinces1 = new ArrayList<>();
-        jiqis.stream()
-                .forEach(s -> s.setCityname(null));
-        jiqis.stream()
-                .forEach(s -> s.setCitycode(null));
-        jiqis.stream()
-                .forEach(s -> s.setDistrictode(null));
-        jiqis.stream()
-                .forEach(s -> s.setDistrictname(null));
 
-        Map<String, String> jq = new HashMap<>();
+        //除重
+        List<Jiqi> jiqis1 = new ArrayList<>();
         for (Jiqi jiqi : jiqis) {
-            jq.put(jiqi.getProcode(), jiqi.getProname());
+            if (!jiqi.proEquals(jiqis1)) {
+                jiqis1.add(jiqi);
+            }
         }
-        jiqis.clear();
-        for (String key : jq.keySet()) {
-            Jiqi a = new Jiqi();
-            a.setProcode(key);
-            a.setProname(jq.get(key));
-            jiqis.add(a);
-        }
+        jiqis = jiqis1;
 
         log.info("输入省数量 ：" + jiqis.size());
 
@@ -136,22 +125,14 @@ public class BaseService<T> {
             jiqis.add(jiqi);
         }
 
-        //去重
-        jiqis.forEach(s -> s.setDistrictode(null));
-        jiqis.forEach(s -> s.setDistrictname(null));
-
-//        //除重
-//        Map<String, Jiqi> jq = new HashMap<>();
-//        for (Jiqi a : jiqis) {
-//            jq.put(a.getCityname(), a);
-//        }
-//        List<Jiqi> as = new ArrayList<>();
-//        for (String key : jq.keySet()) {
-//            Jiqi sss = jq.get(key);
-//            as.add(sss);
-//        }
-//        jiqis = as;
-
+        //除重
+        List<Jiqi> jiqis1 = new ArrayList<>();
+        for (Jiqi jiqi : jiqis) {
+            if (!jiqi.cityEquals(jiqis1)) {
+                jiqis1.add(jiqi);
+            }
+        }
+        jiqis = jiqis1;
         log.info("输入城市数量：" + jiqis.size());
 
         List<City> cities = getCommonData.getCity();

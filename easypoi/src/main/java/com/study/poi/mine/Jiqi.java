@@ -3,6 +3,8 @@ package com.study.poi.mine;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.util.Collection;
+
 /**
  * Created by liuyan on 2017/10/17.
  */
@@ -41,5 +43,41 @@ public class Jiqi {
         result = 31 * result + (procode != null ? procode.hashCode() : 0);
         result = 31 * result + (proname != null ? proname.hashCode() : 0);
         return result;
+    }
+
+    public boolean cityEquals(Collection<Jiqi> collection) {
+        if (collection.size() == 0) {
+            return false;
+        }
+        for (Jiqi e : collection) {
+            if (e.cityEquals(this)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean proEquals(Collection<Jiqi> collection) {
+        if (collection.size() == 0) {
+            return false;
+        }
+        for (Jiqi e : collection) {
+            if (e.proEquals(this)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean proEquals(Jiqi jiqi) {
+        return procode.equals(jiqi.getProcode())
+                && proname.equals(jiqi.getProname());
+    }
+
+    public boolean cityEquals(Jiqi jiqi) {
+        return procode.equals(jiqi.getProcode())
+                && proname.equals(jiqi.getProname())
+                && citycode.equals(jiqi.getCitycode())
+                && cityname.equals(jiqi.getCityname());
     }
 }
