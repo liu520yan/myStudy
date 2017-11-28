@@ -68,7 +68,6 @@ public class BaseService<T> {
             BeanUtils.copyProperties(a, jiqi);
             jiqis.add(jiqi);
         }
-
         List<Province> provinces = getCommonData.getProvince();
         log.info("标准省数量 ：" + provinces.size());
         List<SyncPro> provinces1 = new ArrayList<>();

@@ -9,5 +9,5 @@ zuul:
   routes:
     api:
       path: /tima/**
-      url: http://localhost:8080/
+      url: http://172.20.61.29:8082/
 

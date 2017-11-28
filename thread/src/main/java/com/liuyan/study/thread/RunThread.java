@@ -26,6 +26,8 @@ public class RunThread {
         Thread d = new Thread(threadD);
         d.start();
 
+
+        Thread.holdsLock(c);
         //有返回值的方法
     }
 
