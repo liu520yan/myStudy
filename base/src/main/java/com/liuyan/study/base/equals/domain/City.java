@@ -1,4 +1,4 @@
-package come.liuyan.study.base.equals.domain;
+package com.liuyan.study.base.equals.domain;
 
 import lombok.Data;
 

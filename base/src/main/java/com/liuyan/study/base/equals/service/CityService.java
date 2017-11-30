@@ -1,6 +1,6 @@
-package come.liuyan.study.base.equals.service;
+package com.liuyan.study.base.equals.service;
 
-import come.liuyan.study.base.equals.domain.City;
+import com.liuyan.study.base.equals.domain.City;
 
 import java.util.List;
 

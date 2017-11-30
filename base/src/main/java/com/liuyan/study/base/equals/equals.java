@@ -1,4 +1,4 @@
-package come.liuyan.study.base.equals;
+package com.liuyan.study.base.equals;
 
 
 /**

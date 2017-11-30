@@ -1,4 +1,4 @@
-package come.liuyan.study.base.equals;
+package com.liuyan.study.base.equals;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

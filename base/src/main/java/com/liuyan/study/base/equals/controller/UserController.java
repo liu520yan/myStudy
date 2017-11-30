@@ -1,7 +1,7 @@
-package come.liuyan.study.base.equals.controller;
+package com.liuyan.study.base.equals.controller;
 
-import come.liuyan.study.base.equals.domain.City;
-import come.liuyan.study.base.equals.service.CityService;
+import com.liuyan.study.base.equals.domain.City;
+import com.liuyan.study.base.equals.service.CityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;

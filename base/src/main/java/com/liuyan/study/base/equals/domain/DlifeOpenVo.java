@@ -1,7 +1,6 @@
-package come.liuyan.study.base.equals.domain;
+package com.liuyan.study.base.equals.domain;
 
 import com.alibaba.fastjson.JSONObject;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * Created by liuyan on 2017/11/17.
