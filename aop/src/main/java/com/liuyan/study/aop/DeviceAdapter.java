@@ -23,7 +23,8 @@ public class DeviceAdapter {
     /**
      * 切入点：cn.ictgu.controller 下所有 @GetMapping 方法
      */
-    @Pointcut("execution(* com.liuyan.study.controller.*(..)) && @annotation(org.springframework.web.bind.annotation.GetMapping)")
+    @Pointcut("execution(* com.liuyan.study.controller..*(..)) && @annotation(com.liuyan.study.annotation.User)")
+//    @Pointcut("@annotation(com.liuyan.study.User)")
     public void controllerMethodPointcut() {
     }
 

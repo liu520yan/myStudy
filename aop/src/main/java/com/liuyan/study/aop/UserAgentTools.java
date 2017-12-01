@@ -22,7 +22,4 @@ public class UserAgentTools {
         return UserAgentTypeEnum.PC.getCode();
     }
 
-    public static void main(String[] args) {
-        System.out.println(recognize("Android"));
-    }
 }
