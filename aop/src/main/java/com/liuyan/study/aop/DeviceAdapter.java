@@ -1,10 +1,12 @@
 package com.liuyan.study.aop;
 
+import com.liuyan.study.annotation.User;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -23,16 +25,16 @@ public class DeviceAdapter {
     /**
      * 切入点：cn.ictgu.controller 下所有 @GetMapping 方法
      */
-    @Pointcut("execution(* com.liuyan.study.controller..*(..)) && @annotation(com.liuyan.study.annotation.User)")
+    @Pointcut("execution(* com.liuyan.study.controller..*(..)) && @annotation(com.liuyan.study.annotation.User) && @annotation(user)")
 //    @Pointcut("@annotation(com.liuyan.study.User)")
-    public void controllerMethodPointcut() {
+    public void controllerMethodPointcut(User user) {
     }
 
     /**
      * 识别用户请求的设备并返回对应的页面
      */
-    @Around("controllerMethodPointcut()")
-    public String around(ProceedingJoinPoint joinPoint) {
+    @Around("controllerMethodPointcut(user)")
+    public String around(ProceedingJoinPoint joinPoint, User user) throws Throwable {
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         if (attributes != null) {
             try {
@@ -42,7 +44,7 @@ public class DeviceAdapter {
                 Integer deviceType = UserAgentTools.recognize(userAgent);
                 String path = (String) joinPoint.proceed();
                 String a = deviceType == UserAgentTypeEnum.PHONE.getCode() ? MOBILE_PREFIX + path : path;
-                return a+"web++++";
+                return a + user.age();
             } catch (Throwable e) {
                 e.printStackTrace();
             }
