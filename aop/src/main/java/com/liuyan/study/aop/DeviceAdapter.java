@@ -41,7 +41,8 @@ public class DeviceAdapter {
 
                 Integer deviceType = UserAgentTools.recognize(userAgent);
                 String path = (String) joinPoint.proceed();
-                return deviceType == UserAgentTypeEnum.PHONE.getCode() ? MOBILE_PREFIX + path : path;
+                String a = deviceType == UserAgentTypeEnum.PHONE.getCode() ? MOBILE_PREFIX + path : path;
+                return a+"web++++";
             } catch (Throwable e) {
                 e.printStackTrace();
             }
