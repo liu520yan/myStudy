@@ -12,14 +12,17 @@ public class ForTest {
 
     @Test
     public void test() {
-        List<String> strings = new ArrayList<>(10000000);
-        for (int i = 0; i < 10000000; i++) {
+
+        int size = 800000;
+
+        List<String> strings = new ArrayList<>(size);
+        for (int i = 0; i < size; i++) {
             strings.add("test_" + i);
         }
 
         Instant forStart = Instant.now();
         for (String s : strings) {
-             s = s + "12";
+            s = s + "12";
         }
         Instant forEach = Instant.now();
         long t1 = Duration.between(forStart, forEach).toMillis();
