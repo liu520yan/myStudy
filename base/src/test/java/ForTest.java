@@ -25,13 +25,11 @@ public class ForTest {
             s = s + "12";
         }
         Instant forEach = Instant.now();
-        long t1 = Duration.between(forStart, forEach).toMillis();
-        System.out.println("for time ：" + t1);
-
-        Instant bgnlamda = Instant.now();
         strings.forEach(s -> s = s + "12");
         Instant lamdaend = Instant.now();
-        long t2 = Duration.between(bgnlamda, lamdaend).toMillis();
+        long t2 = Duration.between(forEach, lamdaend).toMillis();
         System.out.println("lamda time ：" + t2);
+        long t1 = Duration.between(forStart, forEach).toMillis();
+        System.out.println("for time ：" + t1);
     }
 }
