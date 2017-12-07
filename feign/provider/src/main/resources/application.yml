@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: eureka-feign-provider
+server:
+  port: 1001
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://eureka.didispace.com/eureka/
