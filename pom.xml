@@ -29,6 +29,7 @@
         <module>FSM</module>
         <module>noif</module>
         <module>aop</module>
+        <module>swagger</module>
     </modules>
     <properties>
         <java.version>1.8</java.version>
