@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class UserService {
-    public String getUser() {
-        return "userService";
+    public String getUser(String userName) {
+        return userName;
     }
 }

@@ -1,7 +1,9 @@
 package com.liuyan.study.aop;
 
 import com.liuyan.study.annotation.User;
+import com.liuyan.study.utils.UrlParamUtils;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -12,6 +14,8 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import java.nio.charset.StandardCharsets;
+import java.util.Map;
 
 /**
  * Created by liuyan on 2017/11/30.
@@ -40,11 +44,16 @@ public class DeviceAdapter {
             try {
                 HttpServletRequest request = attributes.getRequest();
                 String userAgent = request.getHeader("User-Agent");
-
+                String param = request.getQueryString();
+//                if (Base64.isBase64(param)) {
+//                    param = new String(Base64.decodeBase64(param), StandardCharsets.UTF_8);
+//                }
+                Map map = UrlParamUtils.getUrlParams(param);
                 Integer deviceType = UserAgentTools.recognize(userAgent);
                 String path = (String) joinPoint.proceed();
                 String a = deviceType == UserAgentTypeEnum.PHONE.getCode() ? MOBILE_PREFIX + path : path;
-                return a + user.age();
+                System.out.println(a + user.age() + map.get("userName"));
+                return a + user.age() + param;
             } catch (Throwable e) {
                 e.printStackTrace();
             }
