@@ -31,6 +31,7 @@
         <module>aop</module>
         <module>swagger</module>
         <module>feign</module>
+        <module>Interview</module>
     </modules>
     <properties>
         <java.version>1.8</java.version>
