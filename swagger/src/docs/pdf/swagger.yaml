@@ -1,0 +1,120 @@
+---
+swagger: "2.0"
+info:
+  description: "Click Link Below for Help"
+  version: "v1"
+  title: "swagger"
+  termsOfService: "http://www.github.com/kongchen/swagger-maven-plugin"
+host: "orderdish-ecom-web.51ping.com"
+basePath: "/s"
+tags:
+- name: "计算服务"
+  description: "简单的计算服务，提供加减乘除运算API"
+schemes:
+- "http"
+- "https"
+paths:
+  /compute/add:
+    post:
+      tags:
+      - "计算服务"
+      summary: "加法运算"
+      description: ""
+      operationId: "add"
+      parameters:
+      - name: "a"
+        in: "query"
+        description: "加数"
+        required: true
+        type: "number"
+        format: "double"
+      - name: "b"
+        in: "query"
+        description: "加数"
+        required: true
+        type: "number"
+        format: "double"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "number"
+            format: "double"
+  /compute/div:
+    post:
+      tags:
+      - "计算服务"
+      summary: "除法运算"
+      description: ""
+      operationId: "div"
+      parameters:
+      - name: "a"
+        in: "query"
+        description: "被除数"
+        required: true
+        type: "number"
+        format: "double"
+      - name: "b"
+        in: "query"
+        description: "除数"
+        required: true
+        type: "number"
+        format: "double"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "number"
+            format: "double"
+  /compute/mul:
+    post:
+      tags:
+      - "计算服务"
+      summary: "乘法运算"
+      description: ""
+      operationId: "mul"
+      parameters:
+      - name: "a"
+        in: "query"
+        description: "被乘数"
+        required: true
+        type: "number"
+        format: "double"
+      - name: "b"
+        in: "query"
+        description: "乘数"
+        required: true
+        type: "number"
+        format: "double"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "number"
+            format: "double"
+  /compute/sub:
+    post:
+      tags:
+      - "计算服务"
+      summary: "减法运算"
+      description: ""
+      operationId: "sub"
+      parameters:
+      - name: "a"
+        in: "query"
+        description: "被减数"
+        required: true
+        type: "number"
+        format: "double"
+      - name: "b"
+        in: "query"
+        description: "减数"
+        required: true
+        type: "number"
+        format: "double"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "number"
+            format: "double"
