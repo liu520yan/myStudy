@@ -1,4 +1,4 @@
-package com.liuyan.study.design.context;
+package com.liuyan.study.design.factory.simpleFactory.context;
 
 import lombok.Data;
 

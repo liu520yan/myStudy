@@ -1,4 +1,4 @@
-package com.liuyan.study.design.singleton;
+package com.liuyan.study.design.factory.simpleFactory.singleton;
 
 /**
  * 饿汉式单例模式 在类装载时就构建

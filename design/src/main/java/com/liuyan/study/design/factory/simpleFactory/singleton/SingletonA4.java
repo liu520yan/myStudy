@@ -1,4 +1,4 @@
-package com.liuyan.study.design.singleton;
+package com.liuyan.study.design.factory.simpleFactory.singleton;
 
 /**
  * Created by liuyan on 2017/9/15.
