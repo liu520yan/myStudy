@@ -1,33 +1,27 @@
 package com.liuyan.study.config;
-import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
-import org.springframework.orm.jpa.vendor.Database;
 
 import com.liuyan.study.service.DynamicDataSource;
 import com.liuyan.study.service.IUserService;
 import com.liuyan.study.service.UserService2;
 import lombok.extern.slf4j.Slf4j;
-import org.aspectj.lang.annotation.Before;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
 import org.springframework.boot.autoconfigure.orm.jpa.JpaProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.orm.jpa.JpaDialect;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
-import org.springframework.orm.jpa.LocalEntityManagerFactoryBean;
-import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.util.Assert;
 
-import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Properties;
 
 import static com.liuyan.study.service.DataSourceContextHolder.DATA_SOURCE_READ;
 import static com.liuyan.study.service.DataSourceContextHolder.DATA_SOURCE_WRITE;
@@ -67,19 +61,6 @@ public class Config {
         return DataSourceBuilder.create().build();
     }
 
-
-//    @Bean(name = "primaryJdbcTemplate")
-//    public JdbcTemplate primaryJdbcTemplate(
-//            @Qualifier("primaryDataSource") DataSource dataSource) {
-//        return new JdbcTemplate(dataSource);
-//    }
-//
-//    @Bean(name = "secondaryJdbcTemplate")
-//    public JdbcTemplate secondaryJdbcTemplate(
-//            @Qualifier("secondaryDataSource") DataSource dataSource) {
-//        return new JdbcTemplate(dataSource);
-//    }
-
     @Bean
     public DynamicDataSource dynamicDataSource() {
         DynamicDataSource dynamicDataSource = new DynamicDataSource();
@@ -94,13 +75,33 @@ public class Config {
     @Bean
     public JpaTransactionManager getJpaTransactionManager(EntityManagerFactoryBuilder builder) {
         JpaTransactionManager jpaTransactionManager = new JpaTransactionManager();
-        jpaTransactionManager.setEntityManagerFactory((EntityManagerFactory) a(builder));
+        LocalContainerEntityManagerFactoryBean factoryBean =  entityManagerFactory(builder);
+        jpaTransactionManager.setEntityManagerFactory(factoryBean.getObject());
         return jpaTransactionManager;
     }
 
     @Bean(name = "entityManagerFactory")
-    public LocalContainerEntityManagerFactoryBean a(EntityManagerFactoryBuilder builder) {
-        return builder.dataSource(dynamicDataSource()).build();
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory(EntityManagerFactoryBuilder builder) {
+        Assert.notNull(builder, "builder could not null !!");
+        LocalContainerEntityManagerFactoryBean factoryBean = builder
+                .dataSource(dynamicDataSource())
+                .packages("com.liuyan.study.entity")
+                .persistenceUnit("primaryPersistenceUnit")
+                .properties(jpaProperties.getProperties())
+                .build();
+
+        return factoryBean;
     }
 
+    @Bean(name = "transactionManager")
+    public JpaTransactionManager initJpaTransactionManager(EntityManagerFactoryBuilder builder) {
+        JpaTransactionManager jpaTransactionManager = new JpaTransactionManager();
+        jpaTransactionManager.setEntityManagerFactory(entityManagerFactory(builder).getObject());
+        return jpaTransactionManager;
+    }
+
+    @Bean
+    public JdbcTemplate secondaryJdbcTemplate() {
+        return new JdbcTemplate(dynamicDataSource());
+    }
 }
