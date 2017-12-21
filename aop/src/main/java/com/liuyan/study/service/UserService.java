@@ -1,5 +1,6 @@
 package com.liuyan.study.service;
 
+import com.liuyan.study.entity.User;
 import org.springframework.stereotype.Service;
 
 /**
@@ -8,5 +9,10 @@ import org.springframework.stereotype.Service;
 public class UserService implements IUserService {
     public String getUser(String userName) {
         return userName;
+    }
+
+    @Override
+    public User save(User user) {
+        return null;
     }
 }
