@@ -20,8 +20,8 @@ import java.util.Map;
 /**
  * Created by liuyan on 2017/11/30.
  */
-@Aspect
-@Component
+//@Aspect
+//@Component
 @Slf4j
 public class DeviceAdapter {
     private static final String MOBILE_PREFIX = "mobile/";

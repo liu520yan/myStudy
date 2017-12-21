@@ -6,4 +6,4 @@ server:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://eureka.didispace.com/eureka/
+      defaultZone: http://39.108.223.226:1001/eureka/
