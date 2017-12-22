@@ -75,7 +75,7 @@ public class Config {
     @Bean
     public JpaTransactionManager getJpaTransactionManager(EntityManagerFactoryBuilder builder) {
         JpaTransactionManager jpaTransactionManager = new JpaTransactionManager();
-        LocalContainerEntityManagerFactoryBean factoryBean =  entityManagerFactory(builder);
+        LocalContainerEntityManagerFactoryBean factoryBean = entityManagerFactory(builder);
         jpaTransactionManager.setEntityManagerFactory(factoryBean.getObject());
         return jpaTransactionManager;
     }
@@ -83,14 +83,12 @@ public class Config {
     @Bean(name = "entityManagerFactory")
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(EntityManagerFactoryBuilder builder) {
         Assert.notNull(builder, "builder could not null !!");
-        LocalContainerEntityManagerFactoryBean factoryBean = builder
+        return builder
                 .dataSource(dynamicDataSource())
                 .packages("com.liuyan.study.entity")
                 .persistenceUnit("primaryPersistenceUnit")
                 .properties(jpaProperties.getProperties())
                 .build();
-
-        return factoryBean;
     }
 
     @Bean(name = "transactionManager")
