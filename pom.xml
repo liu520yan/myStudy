@@ -33,6 +33,7 @@
         <module>feign</module>
         <module>Interview</module>
         <module>mongo</module>
+        <module>batch</module>
     </modules>
     <properties>
         <java.version>1.8</java.version>
