@@ -22,5 +22,4 @@ public class DcController {
     public String dc(@PathVariable("username") String name) {
         return dcClient.consumer(name);
     }
-
 }
