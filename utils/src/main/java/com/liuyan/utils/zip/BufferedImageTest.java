@@ -1,8 +1,9 @@
-package com.liuyan.study.base.equals.zip;
+package com.liuyan.utils.zip;
 
 import com.sun.image.codec.jpeg.JPEGCodec;
 import com.sun.image.codec.jpeg.JPEGEncodeParam;
 import com.sun.image.codec.jpeg.JPEGImageEncoder;
+import net.coobird.thumbnailator.Thumbnails;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 
@@ -11,12 +12,12 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 
 /**
  * Created by liuyan on 2018/1/4.
  */
 public class BufferedImageTest {
-
 
     public static boolean resize(String src, String to, int newWidth, int newHeight) {
         try {
@@ -83,21 +84,25 @@ public class BufferedImageTest {
     public static void s(String src, String target) {
 
         float largestLength = 500 * 1024 * 1.0f;
-        float srcLength = new File(src).length()* 1.0f;
+        float srcLength = new File(src).length() * 1.0f;
         float quality = largestLength / srcLength;
-        System.out.println(quality);
+
         compress(src, target, quality);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 //        test2();
 //        test3();
-        test4();
-        System.out.println(6928282 * 0.07389999);
+//        test4();https://github.com/coobird/thumbnailator/wiki/Examples
+        Thumbnails.of("E:\\pic\\1.jpg")
+                .width(960)
+                .height(560)
+                .outputQuality(0.5f)
+                .toFile("E:\\pic\\2.jpg");
     }
 
     private static void test4() {
-        s("C:\\Users\\liuyan\\Desktop\\pic\\1.jpg", "C:\\Users\\liuyan\\Desktop\\pic\\3.jpg");
+        s("E:\\pic\\1.jpg", "E:\\pic\\2.jpg");
     }
 
     private static void test3() {
