@@ -1,6 +1,5 @@
 package com.liuyan.study.utils;
 
-import lombok.extern.slf4j.Slf4j;
 import org.squirrelframework.foundation.fsm.StateMachineBuilderFactory;
 import org.squirrelframework.foundation.fsm.UntypedStateMachine;
 import org.squirrelframework.foundation.fsm.UntypedStateMachineBuilder;
@@ -10,7 +9,6 @@ import org.squirrelframework.foundation.fsm.impl.AbstractUntypedStateMachine;
 /**
  * Created by liuyan on 2017/10/27.
  */
-@Slf4j
 public class QuickStartSample {
 
     // 1. Define State Machine Event
