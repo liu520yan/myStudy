@@ -16,7 +16,7 @@ public class BubbleSort {
             return;
         }
         for (int i = 0; i < data.length - 1; i++) {
-            int tmp = 0;
+            int tmp;
             for (int j = 0; j < data.length - 1; j++) {
                 if (reverse) {
                     if (data[j] >= data[j + 1]) {
@@ -39,15 +39,15 @@ public class BubbleSort {
 
     public static void main(String[] args) {
         BubbleSort bubbleSort = new BubbleSort();
-        int[] a = new int[20];
+        int[] a = new int[5];
 
-        for (int i = 0; i < 20; i++) {
-            int random = (int) (Math.random() * 2000);
+        for (int i = 0; i < 5; i++) {
+            int random = (int) (Math.random() * 10);
             a[i] = random;
         }
         bubbleSort.sort(a, false);
-        for (int i = 0; i < 20; i++) {
-            System.out.print(a[i]+",");
+        for (int i = 0; i < 5; i++) {
+            System.out.print(a[i] + ",");
         }
 
     }
