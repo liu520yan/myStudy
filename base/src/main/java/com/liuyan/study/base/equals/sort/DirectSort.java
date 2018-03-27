@@ -23,7 +23,7 @@ public class DirectSort {
             if (target[i] < datum) {
                 if (i + 1 < target.length && target[i + 1] > datum) {
 
-                }else {
+                } else {
 
                 }
             }

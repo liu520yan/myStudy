@@ -17,7 +17,7 @@ public class Msgcontroller {
     private KafkaProduer kafkaProduer;
 
     @RequestMapping(path = "/user", method = RequestMethod.POST)
-    public void getMsg(@RequestBody MsgVo vo) {
+    public void getMsg(@RequestBody Object vo) {
         kafkaProduer.kafkaDemo(vo);
     }
 }

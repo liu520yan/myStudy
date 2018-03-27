@@ -8,7 +8,7 @@ spring:
         username: fawmdev
         password: gZW5jYXA6RXRoZXJu
      sync:
-        url: jdbc:mysql://172.20.61.33:3306/s2_TDATA_SYNC
+        url: jdbc:mysql://172.20.61.33:3306/s4_TDATA_SYNC
         username: fawmdev
         password: gZW5jYXA6RXRoZXJu
         driver-class-name: com.mysql.jdbc.Driver

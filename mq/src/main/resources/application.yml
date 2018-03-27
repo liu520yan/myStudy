@@ -6,4 +6,4 @@ spring:
     consumer:
       group-id: user
     template:
-      default-topic: s1-veh.main.remaind
+      default-topic: s1-veh.status.all

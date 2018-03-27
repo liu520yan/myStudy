@@ -6,6 +6,10 @@ import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.FileInputStream;
 import java.util.ArrayList;
@@ -100,10 +104,46 @@ public class PoiUtils {
         return jiqis;
     }
 
+    public static List<Jiaoche> readTQExcel() throws Exception {
+//        String fileName = "C:\\Users\\liuyan\\Desktop\\excel\\省区和城市基础数据-轿车-红旗.xls";
+        String fileName = "C:\\Users\\liuyan\\Documents\\Tencent Files\\1027552153\\FileRecv\\TDS省市信息.xlsx";
+
+        FileInputStream fileInputStream = new FileInputStream(fileName);
+
+        XSSFWorkbook xssfWorkbook = new XSSFWorkbook(fileInputStream);
+
+        // 2. 创建工作类
+        XSSFSheet sheet = xssfWorkbook.getSheetAt(0);
+
+        int sheetCount = sheet.getLastRowNum();
+
+        List<Jiaoche> jiqis = new ArrayList<>();
+        for (int i = 0; i < sheetCount; i++) {
+            // 3. 创建行 , 第4行 注意:从0开始
+            XSSFRow row = sheet.getRow(i + 1);
+            // 4. 创建单元格, 第4行第1列 注意:从0开始
+            XSSFCell proCode = row.getCell(0);
+            XSSFCell proName = row.getCell(1);
+            XSSFCell cityCode = row.getCell(2);
+            XSSFCell cityName = row.getCell(3);
+
+            Jiaoche jiqi = new Jiaoche();
+            jiqi.setProcode(new Double(proCode.getNumericCellValue()).intValue() + "");
+            jiqi.setProname(proName.getStringCellValue());
+            jiqi.setCitycode(new Double(cityCode.getNumericCellValue()).intValue() + "");
+            jiqi.setCityname(cityName.getStringCellValue());
+            jiqis.add(jiqi);
+        }
+
+        xssfWorkbook.close();
+        fileInputStream.close();
+        return jiqis;
+    }
+
+
     public static void main(String[] args) {
         try {
-            readHQExcel();
-            readJQExcel();
+            readTQExcel();
         } catch (Exception e) {
             e.printStackTrace();
         }

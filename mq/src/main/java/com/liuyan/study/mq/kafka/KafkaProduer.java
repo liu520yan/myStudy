@@ -14,7 +14,7 @@ public class KafkaProduer {
     @Autowired
     private KafkaTemplate<String, String> kafkaTemplate;
 
-    public void kafkaDemo(MsgVo vo) {
+    public void kafkaDemo(Object vo) {
         String voString = JSONObject.toJSON(vo).toString();
         kafkaTemplate.sendDefault(voString);
     }
